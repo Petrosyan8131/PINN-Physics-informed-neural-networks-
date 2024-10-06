@@ -4,11 +4,11 @@ from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 import numpy as np
 
-gamma = 0.0
+gamma = 1.3
 delta = 0.021
-alpha = 0.1
-beta = 0.01
-l = 1
+alpha = 0.0001
+beta = 0.00001
+l = 1.25
 omega = np.pi*l
 
 dots = 500

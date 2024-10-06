@@ -111,7 +111,7 @@ PINN = Neural().to(device)
 
 metric_data = nn.MSELoss()
 # writer = SummaryWriter()
-optimizer = torch.optim.Adam(PINN.parameters(), lr=0.0001) #, lr=0.0001
+optimizer = torch.optim.Adam(PINN.parameters()) #, lr=0.0001
 criterion = nn.NLLLoss()
 
 
@@ -134,10 +134,10 @@ def pdeloss(t, epoh):
     return loss
 
 def pde(out, t):
-        delta = 8.1
-        alpha = 5
-        beta = 1.1
-        omega = torch.pi*1.5
+        delta = 0.021
+        alpha = 0.001
+        beta = 0.00001
+        omega = torch.pi*1.25
         dxdt = torch.autograd.grad(out, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
         d2xdt2 = torch.autograd.grad(dxdt, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
         
