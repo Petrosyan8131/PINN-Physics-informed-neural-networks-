@@ -20,7 +20,13 @@ from tqdm import tqdm
 # a = Runge_Kut()
 # b = a.method()
 
-a = Approx()
+gamma = 1.3
+delta = 3
+alpha = 0.001
+beta = 0.0001
+omega = torch.pi*1.25
+
+a = Approx((gamma, delta, alpha, beta, omega))
 b = a.solve()
 
 num_data = torch.from_numpy(b.y[0, 1:]).unsqueeze(1)
@@ -29,7 +35,7 @@ matplotlib.rcParams['figure.figsize'] = (10.0, 7.0)
 
 epohs = 6000
 dots = 500
-gamma = 1.3
+
 loss_all = np.zeros(epohs)
 loss_all_num = np.zeros(epohs)
 lambd = 1
@@ -136,10 +142,6 @@ def pdeloss(t, epoh):
     return loss
 
 def pde(out, t):
-        delta = 0.021
-        alpha = 0.001
-        beta = 0.00001
-        omega = torch.pi*1.25
         dxdt = torch.autograd.grad(out, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
         d2xdt2 = torch.autograd.grad(dxdt, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
         
