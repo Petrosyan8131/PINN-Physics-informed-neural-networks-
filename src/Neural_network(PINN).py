@@ -126,6 +126,7 @@ def pdeloss(t, epoh):
     # loss_bc = metric_data(f_bc, g_true)
     loss_tens = torch.pow(f_bc-g_true, 2)
     loss_bc = loss_tens[0] + loss_tens[1]
+
     loss_num = torch.max(torch.abs(f_in - num_data))
     
     loss = loss_pde + loss_bc*lambd
