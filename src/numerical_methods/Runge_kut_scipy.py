@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 gamma = 1.0
-delta = 8.1
-alpha = 5
-beta = 1.1
-omega = np.pi*1.5
+delta = 0.001
+alpha = 0
+beta = 0
+l = 1
+omega = np.pi*l
 
 dots = 500
 x_0 = 0
@@ -50,5 +51,12 @@ if __name__ == "__main__": # pragma: no cover
     plt.plot(t, sol.y[0, :], 'r')
     plt.xlabel('t')
     plt.ylabel('x(t)')
-    plt.grid()                      
+    dl = (max(sol.y[0]) - min(sol.y[1]))*0.012 # <- change tha last parameter to align the labels
+    plt.text(t[-1]/2-2.5, max(sol.y[0, :])+1.3*dl, f"omega={'' if l==1 else l}pi")
+    plt.text(t[-1]/2, max(sol.y[0])+1.6*dl, f"gamma={gamma}")
+    plt.text(t[-1]/2, max(sol.y[0])+dl, f"delta={delta}")
+    plt.text(t[-1]/2+2.5, max(sol.y[0])+1.6*dl, f"alpha={alpha}")
+    plt.text(t[-1]/2+2.5, max(sol.y[0])+dl, f"beta={beta}")
+    # plt.grid()
+    plt.savefig(r"././figs/numerical_approx.png")
     plt.show()

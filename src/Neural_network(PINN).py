@@ -32,7 +32,7 @@ dots = 500
 gamma = 1.3
 loss_all = np.zeros(epohs)
 loss_all_num = np.zeros(epohs)
-lambd = 1e-2
+lambd = 1
 # Используем доступные графические процессоры
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
