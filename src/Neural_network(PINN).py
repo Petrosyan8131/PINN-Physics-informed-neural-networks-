@@ -20,12 +20,14 @@ from tqdm import tqdm
 # a = Runge_Kut()
 # b = a.method()
 
+# set the parameters of the equation
 gamma = 1.3
 delta = 3
 alpha = 0.001
 beta = 0.0001
 omega = torch.pi*1.25
 
+# set the numerical approximation
 a = Approx((gamma, delta, alpha, beta, omega))
 b = a.solve()
 
