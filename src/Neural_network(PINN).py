@@ -129,9 +129,9 @@ def pdeloss(t, epoh):
     dxdt = torch.autograd.grad(f_bc, t_bc, torch.ones_like(t_bc), create_graph=True, retain_graph=True)[0]
     f_bc = torch.cat([f_bc, dxdt], 0)
     loss_pde = metric_data(f_in, f_true)
-    # loss_bc = metric_data(f_bc, g_true)
-    loss_tens = torch.pow(f_bc-g_true, 2)
-    loss_bc = loss_tens[0] + loss_tens[1]
+    loss_bc = metric_data(f_bc, g_true)
+    # loss_tens = torch.pow(f_bc-g_true, 2)
+    # loss_bc = loss_tens[0] + loss_tens[1]
 
     loss_num = torch.max(torch.abs(f_in - num_data))
     
