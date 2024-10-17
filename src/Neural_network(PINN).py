@@ -40,7 +40,7 @@ dots = 500
 
 loss_all = np.zeros(epohs)
 loss_all_num = np.zeros(epohs)
-lambd = 1
+lambd = 0.001
 # Используем доступные графические процессоры
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -73,44 +73,6 @@ class Neural(nn.Module):
 
     def forward(self, x):
         return self.layers_stack(x)
-
-def draw_approx(net, t):
-    fs = 12
-    # x = net.forward(t)
-    x = PINN(t).to(device)
-    z = torch.autograd.grad(x, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
-    plt.plot(t.detach().numpy(), x.detach().numpy(), '-', label=r"approx func")
-    plt.plot(t.detach().numpy(), z.detach().numpy(), '-', label=r"first derivative")
-    plt.plot(t.detach().numpy(), b.y[0, :], '-', label=r"numerical method")
-    # plt.plot(b[2], b[0], '-', label=r"numerical_approx")
-    plt.legend(fontsize=fs)
-    plt.title('Approxing Duffing equation')
-    plt.tight_layout()
-    plt.savefig(r"./figs/approx_Duffing.png")
-    plt.show()
-
-def draw_history(net, t):
-    fs = 12
-    plt.plot(loss_all, label=r'Total Loss')
-    plt.plot(loss_all_num, label=r'Loss With Numeral')
-
-    ax=plt.gca()
-    ax.set_yscale('log')
-    plt.grid(which='major', linestyle='-')
-    plt.grid(which='minor', linestyle='--')
-    plt.xlim(0, epohs)
-    plt.ylim(1e-5, 1e3)
-    plt.xticks(fontsize=fs)
-    plt.yticks(fontsize=fs)
-    ax.tick_params(axis='both',direction='in')
-
-    plt.legend(fontsize=fs)
-    plt.xlabel('Iteration count', fontsize=fs)
-    plt.ylabel('Loss', fontsize=fs)
-    plt.title('Loss while training')
-    plt.tight_layout()
-    plt.savefig(r"./figs/history_Duffing.png")
-    plt.show()
 
 # Создание модели PINN и её обучение
 PINN = Neural().to(device)
@@ -170,6 +132,44 @@ train()
 
 torch.save(PINN.state_dict(), r'./weights/weights_PINN_Duffing_equation.pth')
 # filescolab.download("weights_PINN_harm_oscil_3exp.pth")
+
+def draw_approx(net, t):
+    fs = 12
+    # x = net.forward(t)
+    x = PINN(t).to(device)
+    z = torch.autograd.grad(x, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
+    plt.plot(t.detach().numpy(), x.detach().numpy(), '-', label=r"approx func")
+    plt.plot(t.detach().numpy(), z.detach().numpy(), '-', label=r"first derivative")
+    plt.plot(t.detach().numpy(), b.y[0, :], '-', label=r"numerical method")
+    # plt.plot(b[2], b[0], '-', label=r"numerical_approx")
+    plt.legend(fontsize=fs)
+    plt.title('Approxing Duffing equation')
+    plt.tight_layout()
+    plt.savefig(r"./figs/approx_Duffing.png")
+    plt.show()
+
+def draw_history(net, t):
+    fs = 12
+    plt.plot(loss_all, label=r'Total Loss')
+    plt.plot(loss_all_num, label=r'Loss With Numeral')
+
+    ax=plt.gca()
+    ax.set_yscale('log')
+    plt.grid(which='major', linestyle='-')
+    plt.grid(which='minor', linestyle='--')
+    plt.xlim(0, epohs)
+    plt.ylim(1e-5, 1e3)
+    plt.xticks(fontsize=fs)
+    plt.yticks(fontsize=fs)
+    ax.tick_params(axis='both',direction='in')
+
+    plt.legend(fontsize=fs)
+    plt.xlabel('Iteration count', fontsize=fs)
+    plt.ylabel('Loss', fontsize=fs)
+    plt.title('Loss while training')
+    plt.tight_layout()
+    plt.savefig(r"./figs/history_Duffing.png")
+    plt.show()
 
 draw_approx(PINN, t)
 draw_history(PINN, t)
