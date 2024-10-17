@@ -40,7 +40,7 @@ dots = 500
 
 loss_all = np.zeros(epohs)
 loss_all_num = np.zeros(epohs)
-lambd = 0.001
+lambd = 1e+4
 # Используем доступные графические процессоры
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -133,6 +133,7 @@ train()
 torch.save(PINN.state_dict(), r'./weights/weights_PINN_Duffing_equation.pth')
 # filescolab.download("weights_PINN_harm_oscil_3exp.pth")
 
+# initialize draw functions
 def draw_approx(net, t):
     fs = 12
     # x = net.forward(t)
