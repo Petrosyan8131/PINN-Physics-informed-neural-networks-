@@ -4,8 +4,8 @@ from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 import numpy as np
 
-gamma = 0.002
-delta = 1.2
+gamma = 0.001
+delta = 1
 alpha = 0.001
 beta = 0.001
 l = 1.25
