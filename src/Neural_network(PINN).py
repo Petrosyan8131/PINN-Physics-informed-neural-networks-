@@ -21,10 +21,10 @@ from tqdm import tqdm
 # b = a.method()
 
 # set the parameters of the equation
-gamma = 10
-delta = 0.002
-alpha = 1
-beta = 1
+gamma = 0.001
+delta = 0.02
+alpha = 0.0001
+beta = 0.001
 omega = torch.pi*1.25
 
 # set the numerical approximation
@@ -140,8 +140,8 @@ def draw_approx(net, t):
     x = PINN(t).to(device)
     z = torch.autograd.grad(x, t, torch.ones_like(t), create_graph=True, retain_graph=True)[0]
     plt.plot(t.detach().numpy(), x.detach().numpy(), '-', label=r"approx func")
-    plt.plot(t.detach().numpy(), z.detach().numpy(), '-', label=r"first derivative")
-    plt.plot(t.detach().numpy(), b.y[0, :], '-', label=r"numerical method")
+    # plt.plot(t.detach().numpy(), z.detach().numpy(), '-', label=r"first derivative")
+    plt.plot(t.detach().numpy(), b.y[0, :], '-', label=r"numerical method", color="green")
     # plt.plot(b[2], b[0], '-', label=r"numerical_approx")
     plt.legend(fontsize=fs)
     plt.title('Approxing Duffing equation')
