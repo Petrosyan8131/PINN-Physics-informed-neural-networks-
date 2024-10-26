@@ -21,10 +21,10 @@ from tqdm import tqdm
 # b = a.method()
 
 # set the parameters of the equation
-gamma = 1.3
-delta = 3
-alpha = 0.001
-beta = 0.0001
+gamma = 10
+delta = 0.002
+alpha = 1
+beta = 1
 omega = torch.pi*1.25
 
 # set the numerical approximation
@@ -40,7 +40,7 @@ dots = 500
 
 loss_all = np.zeros(epohs)
 loss_all_num = np.zeros(epohs)
-lambd = 1e+4
+lambd = 1
 # Используем доступные графические процессоры
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
