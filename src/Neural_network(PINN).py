@@ -21,8 +21,8 @@ from tqdm import tqdm
 # b = a.method()
 
 # set the parameters of the equation
-gamma = 0.001
-delta = 0.02
+gamma = 1
+delta = 1
 alpha = 0.0001
 beta = 0.001
 omega = torch.pi*1.25
