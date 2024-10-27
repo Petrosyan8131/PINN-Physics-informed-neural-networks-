@@ -21,11 +21,12 @@ from tqdm import tqdm
 # b = a.method()
 
 # set the parameters of the equation
-gamma = 1
-delta = 1
+gamma = 0.04
+delta = 0.02
 alpha = 0.0001
 beta = 0.001
-omega = torch.pi*1.25
+par = 1.25
+omega = torch.pi*par
 
 # set the numerical approximation
 a = Approx((gamma, delta, alpha, beta, omega))
@@ -126,6 +127,7 @@ def train():
             pbar.set_description("Lambda: %.4f | Step: %d | Loss: %.7f" %
                                 (lambd, step, current_loss))
     pbar.clear()
+    print(gamma, delta, alpha, beta, f"{par}pi",loss_all[-1], loss_all_num[-1])
 
 train()
 # writer.close()
