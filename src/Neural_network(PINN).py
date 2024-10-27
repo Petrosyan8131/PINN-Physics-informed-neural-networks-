@@ -37,7 +37,7 @@ t.requires_grad = True
 t_in = t[1:]
 t_bc = t[0]
 
-f_true = torch.zeros(dots-1).to(device)
+f_true = (torch.zeros(dots-1).unsqueeze(1)).to(device)
 f_true.requires_grad = True
 g_true = torch.tensor([1., 0.]).to(device)
 g_true.requires_grad = True
