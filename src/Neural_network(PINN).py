@@ -32,10 +32,14 @@ lambd = 1
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Задаем начальные данные для апроксимации (задание сетки точек)
-t = (torch.linspace(0, 10.4, dots).unsqueeze(1)).to(device)
-t.requires_grad = True
-t_in = t[1:]
-t_bc = t[0]
+def grid_of_dots():
+    t = (torch.linspace(0, 10.4, dots).unsqueeze(1)).to(device)
+    t.requires_grad = True
+    t1 = t[1:].to(device)
+    t2 = t[0].to(device)
+    return t, t1, t2
+
+t, t_in, t_bc = grid_of_dots()
 
 f_true = (torch.zeros(dots-1).unsqueeze(1)).to(device)
 f_true.requires_grad = True
