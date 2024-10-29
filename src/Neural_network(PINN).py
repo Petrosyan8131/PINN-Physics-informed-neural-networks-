@@ -82,7 +82,7 @@ def pdeloss(t, epoh, p, num_data):
     # loss_tens = torch.pow(f_bc-g_true, 2)
     # loss_bc = loss_tens[0] + loss_tens[1]
 
-    loss_num = torch.max(torch.abs(f_in - num_data))
+    loss_num = torch.max(torch.abs(out - num_data))
     
     loss = loss_pde + loss_bc*lambd
     loss_all[epoh] = loss
