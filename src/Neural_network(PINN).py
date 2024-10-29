@@ -118,7 +118,8 @@ def train(model, p, num_data):
                                 (lambd, step, current_loss))
     pbar.clear()
     torch.save(PINN.state_dict(), r'./weights/weights_PINN_Duffing_equation.pth')
-    print(gamma, delta, alpha, beta, f"{par}pi",loss_all[-1], loss_all_num[-1])
+    with open("./figs/stat_analit.txt", "a") as file:
+        file.write(f"{gamma}, {delta}, {alpha}, {beta}, {par}pi, {loss_all[-1]}, {loss_all_num[-1]} \n")
 
 
 # initialize draw functions
@@ -163,8 +164,8 @@ def draw_history(net, t):
 if __name__ == "__main__":
     gamma = 1
     delta = 6.6
-    alpha = 7
-    beta = 5
+    alpha = 1                 # <-- Параметры уравнения
+    beta = 1
     par = 1.25
     omega = torch.pi*par
     p = (gamma, delta, alpha, beta, omega)
