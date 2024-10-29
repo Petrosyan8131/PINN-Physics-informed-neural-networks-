@@ -159,10 +159,10 @@ def draw_history(net, t):
     plt.show()
 
 if __name__ == "__main__":
-    gamma = 1
-    delta = 6.6
-    alpha = 2
-    beta = 1.2
+    gamma = 0.04
+    delta = 0.02
+    alpha = 0.0001
+    beta = 0.001
     par = 1.25
     omega = torch.pi*par
     p = (gamma, delta, alpha, beta, omega)
