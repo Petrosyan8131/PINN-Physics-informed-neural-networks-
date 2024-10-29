@@ -4,10 +4,10 @@ from scipy.integrate import odeint, solve_ivp
 import matplotlib.pyplot as plt
 import numpy as np
 
-gamma = 10
-delta = 0.01
-alpha = 7
-beta = 5
+gamma = 0.04
+delta = 0.02
+alpha = 0.0001
+beta = 0.001
 l = 1.25
 omega = np.pi*l
 
