@@ -35,9 +35,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 def grid_of_dots():
     t = (torch.linspace(0, 10.4, dots).unsqueeze(1)).to(device)
     t.requires_grad = True
-    t1 = t[1:].to(device)
-    t2 = t[0].to(device)
-    return t, t1, t2
+    return t, t[1:], t[0]
 
 t, t_in, t_bc = grid_of_dots()
 
@@ -163,10 +161,10 @@ def draw_history(net, t):
     plt.show()
 
 if __name__ == "__main__":
-    gamma = 0.04
-    delta = 0.02
-    alpha = 0.0001
-    beta = 0.001
+    gamma = 1
+    delta = 6.6
+    alpha = 7
+    beta = 5
     par = 1.25
     omega = torch.pi*par
     p = (gamma, delta, alpha, beta, omega)
