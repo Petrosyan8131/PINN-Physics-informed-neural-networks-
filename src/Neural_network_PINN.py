@@ -119,7 +119,7 @@ def train(model, p, num_data):
     pbar.clear()
     torch.save(model.state_dict(), r'./weights/weights_PINN_Duffing_equation.pth')
     with open("./figs/stat_analit.txt", "a") as file:
-        file.write(gamma, delta, alpha, beta, f"{par}pi", loss_all[-1], loss_all_num[-1], "\n")
+        file.write(f"{gamma}, {delta}, {alpha}, {beta}, {par}pi, {loss_all[-1]}, {loss_all_num[-1]}\n")
 
 
 # initialize draw functions
